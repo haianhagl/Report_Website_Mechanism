@@ -1,0 +1,120 @@
+# CƠ CHẾ HOẠT ĐỘNG CỦA WEBSITE
+
+    I. Cơ chế hoạt động của internet
+    II. Giải thích về protocol của HTTP/HTTPS
+    III. Cơ chế hoạt động của browser và sự khác nhau giữa các browser
+    IV. Cơ chế hoạt động của DNS và domain
+    V. Giải thích về hosting server
+
+## I. Cơ chế hoạt động của internet
+### 1. Định nghĩa internet:
+* Là mạng lưới toàn cầu giúp các thiết bị điện tử có thể truy cập thông tin, giao tiếp, chuyển đổi và hơn nữa.
+### 2. Website là gì?
+* Tên đầy đủ là **World Wide Web** - một trong những thể hiện được tạo nên để người dùng có thể sử dụng kết nối với nhau thông qua internet.
+* Mỗi website có một mục đích khác nhau để đáp ứng nhu cầu của người sử dụng (*VD: Web tin tức, Web bán hàng, Web giải trí,...*).
+* Website được thể hiện qua trình duyệt web, tức là để truy cập được website thì người dùng phải thông qua một trình duyệt web mà bên trong nó chứa rất nhiều cơ chế ngầm về các giao thức để có thể hiển thị lên được website.
+
+## II. Giải thích về protocol của HTTP/HTTPS
+### 1. HTTP và HTTPS là gì?
+#### a. HTTP là gì?
+* **HTTP** là chữ viết tắt của **Hyper Text Transfer Protocol** (giao thức truyền tải siêu văn bản).
+* Hoạt động dựa trên mô hình máy khách (client) - máy chủ (server):
+
+![So-do-HTTP](https://cdn.tgdd.vn/Files/2018/11/10/1130277/giao-thuc-http-https-la-gi-co-gi-khac-nhau-nhung-dieu-can-biet-de-su-dung-internet-an-toan-hon.jpg "Cơ chế hoạt động giao thức HTTP")
+
+* Bất kỳ thiết bị nào gửi yêu cầu (request) đều sẽ có vai trò như một **client (máy khách)** và bất kỳ thiết bị nào nhận và trả về (response) dữ liệu được yêu cầu từ client sẽ đóng vai trò là **một server (máy chủ)**.
+* Mô hình trên cho thấy browser là một client gửi request đến server và server trả lại response các dữ liệu về phía browser.
+
+#### b. HTTPS là gì?
+* **HTTPS** (viết tắt là **Hyper Text Transfer Protocol Secure**) là phiên bản an toàn của **HTTP**.
+* Hoạt động tương tự như HTTP, tuy nhiên được bổ sung thêm chứng chỉ **SSL (Secure Sockets Layer)** hoặc **TLS (Transport Layer Security)**.
+*  [Tham khảo cơ chế bảo mật của HTTPS](https://developers.google.com/search/docs/advanced/security/https?hl=vi)
+### 2. Sự khác nhau giữa HTTP và HTTPS
+| Đặc điểm       | HTTP             | HTTPS                   |
+|---------------|---------------|---------------------|
+|Mô hình hoạt động|Máy khách - Máy chủ thông qua giao thức TCP/IP|Tương tự HTTP nhưng **bổ sung thêm giao thức SSL và TSL**|
+|Mã hóa|Không được mã hóa thông tin|Mã hóa thông tin, sử dụng SSL/ TSL tiêu chuẩn công nghệ bảo mật, truyền thông mã hóa giữa máy chủ webserver và trình duyệt|
+|Mức độ bảo mật|Bảo mật kém, dễ rò rỉ thông tin|Bảo mật thông tin tốt, an toàn cho người sử dụng|
+### 3. Những điều cần biết khi sử dụng HTTP, HTTPS
+* Khi truy cập vào các **trang thanh toán điện tử** cần phải xác định giao thức mà trang web đó đang sử dụng.
+* Link đường dẫn của website có sử dụng giao thức HTTPS thường đi kèm với **biểu tượng nhỏ hình ổ khóa**. 
+
+## III. Cơ chế hoạt động của browser và sự khác nhau giữa các browser
+### 1. Browser (trình duyệt) làm việc như thế nào?
+#### a. Tổng quan về Browser
+
+![So-do-Browser](https://images.viblo.asia/8586f271-89c9-4737-9ac6-77ea1eaf1bad.png "Mô hình hoạt động Browser")
+
+##### Các thành phần chính của trình duyệt: 
+=============================================================================
+    - *User Interface*: bao gồm thanh địa chỉ, nút back/forward, bookmarking,....
+    - *Browser Engine*: thực hiện các hành động tương tác giữa giao diện người dùng và công cụ dựng hình.
+    - *Rendering Engine*: chịu trách nhiệm hiển thị nội dung yêu cầu. Bao gồm:
+        + *Networking*: để gửi - nhận yêu cầu phản hồi qua mạng thông qua các giao thức như HTTP.
+        + *UI Backend*: sử dụng để vẽ các wigets cơ bản như combo boxes và windows.
+        + *JavaScript Interpreter*: phiên dịch, phân tích và thực thi mã JavaScript.
+    - *Data Persistence*: để các trình duyệt lưu các loại dữ liệu cục bộ (cookie, session storage, local storage,...).
+
+#### b. Cơ chế hoạt động của browser
+
+1. Người dùng tương tác trên **User Interface** (Gõ tên trang web).
+2. Browser nhận được sự kiện và bắt đầu hoạt động.
+3. Browser kiểm tra trên **data persistence** xem đã lưu trang web chưa (Nếu đã lưu rồi sẽ render ra trình duyệt trực tiếp, nếu chưa tiếp tục bước 4).
+4. Browser sẽ bắt đầu thực hiện **navigation**[1].
+5. Gửi request lên server để lấy dữ liệu.
+6. Server trả về dữ liệu bao gồm HTML, CSS, JS thông qua hành động **fetching**[2].
+7. Sau khi có dữ liệu trả về từ server (HTML, CSS, JS), browser sẽ **parsing**[3] các dữ liệu đó ra DOM.
+8. **Render**[4] các DOM hiển thị lên giao diện trình duyệt.
+
+[1]: Thực hiện điều hướng, thực hiện quá trình phần giải tên miền và thiết lập giao thức bảo mật TLS và kết nối với server.
+[2]: Thực hiện các giao thức HTTP request lên server và nhận dữ liệu qua HTTP response theo các phương thức cụ thể (GET, POST, PUT, DELETE,....).
+[3]: Kết hợp HTML, CSS, JS thành các DOM sẵn sàng hiển thị ra trình duyệt.
+[4]: Hiển thị các DOM ra trình duyệt.
+
+### 2. Sự khác nhau giữa các browser
+- Các browser trên thị trường hiện nay:
+    + Chrome
+    + Edge
+    + Safari
+    + Opera
+    + Firefox
+    + ...
+- Mỗi browser sẽ vận hành trên lõi riêng biệt (VD: chrome,safari sử dụng webkit, firefox sử dụng gecko, opera sử dụng presto,...)
+- Vì tính chất riêng biệt của các lõi trên mỗi browser sẽ có các cấu hình UI Backend riêng biệt.
+
+## IV. Cơ chế hoạt động của Domain và DNS
+### 1. Định nghĩa Domain
+- **Domain** là tên miền của một website.
+- Mỗi **domain** ứng với địa chỉ IP được đăng ký trên hosting cho mỗi trang web (Thay vì phải gõ địa chỉ IP để hiển thị giao diện web, ta chỉ cần gõ tên miền được phân giải).
+- Cấu trúc: "tên miền"."hậu tố" (VD: google.com)
+    + Hậu tố là các top-level-domain (TLD).
+    + Tên miền là tên của website được đăng ký để phân giải từ địa chỉ IP trên hosting.
+- Ngoài ra cấu trúc còn có thể chứa **second-level-domain (SLD)** hay **miền phụ (sub-domain)**.
+
+### 2. Định nghĩa DNS
+- Tên đầy đủ là **Domain Name System** - hệ thống phân giải tên miền.
+- Chức năng có thể hiểu như một *"người phiên dịch"* và *"truyền đạt thông tin"*.
+- Có các loại bản ghi như: CNAME, A Record, MX Record, AAAA Record, NS Record,...
+
+### 3. Cơ chế hoạt động
+- Tham khảo: [Cơ chế hoạt động của DNS là gì?](https://wiki.matbao.net/dns-la-gi-tam-quan-trong-cua-dns-trong-the-gioi-mang/#co-che-hoat-dong-cua-dns-la-gi)
+
+## V. Giải thích về Hosting server
+### 1. Định nghĩa hosting
+- **Hosting** còn gọi là web hosting là một dịch vụ online giúp xuất bản website hoặc ứng dụng web lên Internet.
+- Khi đăng ký dịch vụ **hosting**, tức là đang thuê một chỗ đặt trên server chứa tất cả các files và dữ liệu cần thiết để website vận hành được.
+
+### 2. Cách hoạt động của hosting
+- **Hosting** sẽ chứa tất cả các files, tài liệu, database của một website và được đặt trên một server.
+- Khi người dùng gõ tên miền lên thanh địa chỉ trình duyệt, **hosting** sẽ chuyển toàn bộ files cần thiết từ server xuống trình duyệt đó.
+- Trong thời gian duy trì **hosting**, chủ website có thể thao tác sửa đổi bất kỳ lên hosting để render ứng với các nhu cầu của người dùng.
+
+### 3. Các loại web hosting khác nhau
+Hầu hết các nhà cung cấp hosts đều cung cấp nhiều loại hosting khác nhau để đáp ứng từng nhu cầu khác nhau của nhiều khách hàng:
+- Shared Hosting
+- VPS Hosting
+- Cloud Hosting
+- WordPress Hosting
+- Dedicated Server Hosting
+
+
